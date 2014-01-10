@@ -32,4 +32,16 @@ public class FirstRxTest {
         latch.await();
         assertTrue(true);
     }
+
+    @Test
+    public void testObservableArray_withObserver() throws InterruptedException {
+        String[] names = new String[] {"Jake", "Alex"};
+        final CountDownLatch latch = new CountDownLatch(names.length);
+
+        LatchedObserver observer = new LatchedObserver("one", latch);
+        Observable.from(names).subscribe(observer);
+
+        latch.await();
+        assertTrue(true);
+    }
 }
